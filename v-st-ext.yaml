@@ -41,11 +41,8 @@ normative_rule_definitions:
   - name: vwop_vd_eew_emul
     tags: ["norm:vwop_vd_eew_emul"]
 
-  - name: vnop_vs2_eew_emul
-    tags: ["norm:vnop_vs2_eew_emul"]
-
-  - name: vnop_vd_eew_emul
-    tags: ["norm:vnop_vd_eew_emul"]
+  - name: [vnop_vd_eew_emul, vnop_vs2_eew_emul]
+    tags: ["norm:vnop_vd_vs2_eew_emul"]
 
   - name: vnop_vs1_eew_emul
     tags: ["norm:vnop_vs1_eew_emul"]

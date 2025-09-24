@@ -2298,8 +2298,8 @@ operands are always next to each other.
 [[sec-widening]]
 ==== Widening Vector Arithmetic Instructions
 
-A few vector arithmetic instructions are defined to be __widening__
-operations where [#norm:vwop_vd_eew_emul]#the destination vector register group has EEW=2*SEW
+[#norm:vwop_vd_eew_emul]#A few vector arithmetic instructions are defined to be __widening__
+operations where the destination vector register group has EEW=2*SEW
 and EMUL=2*LMUL.#  These are generally given a `vw*` prefix on the
 opcode, or `vfw*` for vector floating-point instructions.
 
@@ -2332,9 +2332,9 @@ Widening instruction encodings must follow the constraints in
 [[sec-narrowing]]
 ==== Narrowing Vector Arithmetic Instructions
 
-A few instructions are provided to convert double-width source vectors
+[#norm:vnop_vd_vs2_eew_emul]#A few instructions are provided to convert double-width source vectors
 into single-width destination vectors.  These instructions convert a
-[#norm:vnop_vs2_eew_emul]#vector register group specified by `vs2` with EEW/EMUL=2*SEW/2*LMUL# [#norm:vnop_vd_eew_emul]#to a vector register
+vector register group specified by `vs2` with EEW/EMUL=2*SEW/2*LMUL to a vector register
 group with the current SEW/LMUL setting.#  [#norm:vnop_vs1_eew_emul]#Where there is a second
 source vector register group (specified by `vs1`), this has the same
 (narrower) width as the result (i.e., EEW=SEW).#
