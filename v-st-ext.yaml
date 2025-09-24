@@ -1,4 +1,55 @@
 normative_rule_definitions:
+  - name: V_FP_frm
+    tags: ["norm:V_FP_frm"]
+
+  - name: V_inv_frm_rsv
+    tags: ["norm:V_inv_frm_rsv"]
+
+  - name: vop-vv_vreg_vs2_vs1
+    tags: ["norm:vop-vv_vreg_vs2_vs1"]
+  
+  - name: [vop-vx_vreg_vs2, vop-vi_vreg_vs2]
+    tags: ["norm:vop-vx_vop-vi_vreg_vs2"]
+
+  - name: vop-vi_imm_5bit
+    tags: ["norm:vop-vi_imm_5bit"]
+
+  - name: vop-vx_xreg_rs1
+    tags: ["norm:vop-vx_xreg_rs1"]
+
+  - name: vop-vx_rs1_trunc_lsb_SEWbits
+    tags: ["norm:vop-vx_rs1_trunc_lsb_SEWbits"]
+
+  - name: vop-vx_rs1_sext_SEWbits
+    tags: ["norm:vop-vx_rs1_sext_SEWbits"]
+
+  - name: vfop_freg
+    tags: ["norm:vfop_freg"]
+
+  - name: vfop_freg_NaNbox_lsb_SEWbits
+    tags: ["norm:vfop_freg_NaNbox_lsb_SEWbits"]
+
+  - name: V_fp_eew_rsv
+    tags: ["norm:V_fp_eew_rsv"]
+
+  - name: V_Zfinx_fp_scalar
+    tags: ["norm:V_Zinx_fp_scalar"]
+
+  - name: V_masked
+    tags: ["norm:V_masked"]
+  
+  - name: vwop_vd_eew_emul
+    tags: ["norm:vwop_vd_eew_emul"]
+
+  - name: vnop_vs2_eew_emul
+    tags: ["norm:vnop_vs2_eew_emul"]
+
+  - name: vnop_vd_eew_emul
+    tags: ["norm:vnop_vd_eew_emul"]
+
+  - name: vnop_vs1_eew_emul
+    tags: ["norm:vnop_vs1_eew_emul"]
+  
   - name: [vadd_op, vsub_op]
     tags: ["norm:vadd_vsub_op"]
   
@@ -533,5 +584,34 @@ normative_rule_definitions:
   - name: [epc_op_V_trap, vstart_op_V_trap]
     tags: ["norm:epc_vstart_op_V_trap"]
 
+  - name: Zve_XLEN
+    tags: ["norm:Zve_XLEN"]
+
+  - name: Zve32f_Zve64x_dependent_Zve32x
+    tags: ["norm:Zve32f_Zve64x_dependent_Zve32x"]
+
+  - name: Zve64f_dependent_Zve32f_Zve64x
+    tags: ["norm:Zve64f_dependent_Zve32f_Zve64x"]
+
+  - name: Zve64d_dependent_Zve64f
+    tags: ["norm:Zve64d_dependent_Zve64f"]
+
+  - name: Zve_precise_traps
+    tags: ["norm:Zve_precise_traps"]
+
+  - name: Zve_EEW
+    tags: ["norm:Zve_EEW"]
+  
+  - name: Zve_nsupport_EEW64_XLEN32
+    tags: ["norm:Zve_nsupport_EEW64_XLEN32"]
+
+  - name: Zve64_EEW64_nsupport_vmulh
+    tags: ["norm:Zve64_EEW64_nsupport_vmulh"]
+
+  - name: Zve64_EEW64_nsupport_vsmul
+    tags: ["norm:Zve64_EEW64_nsupport_vsmul"]
+
+  - name: Zve32x_Zve64x_nsupport_freg
+    tags: ["norm:Zve32x_Zve64x_nsupport_freg"]
   
   

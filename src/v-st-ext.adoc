@@ -2205,7 +2205,7 @@ NOTE: In this discussion, fixed-point operations are
 considered to be integer operations.
 
 All standard vector floating-point arithmetic operations follow the
-IEEE-754/2008 standard.  [#norm:V:instgrp:FP:frm]#All vector floating-point operations use the dynamic rounding mode in the `frm` register.#  [#norm:V_frm_rsv]#Use of the `frm` field
+IEEE-754/2008 standard.  [#norm:V_FP_frm]#All vector floating-point operations use the dynamic rounding mode in the `frm` register.#  [#norm:V_inv_frm_rsv]#Use of the `frm` field
 when it contains an invalid rounding mode by any vector floating-point
 instruction--even those that do not depend on the rounding mode, or
 when `vl`=0, or when `vstart` {ge} `vl`--is reserved.#
@@ -2215,23 +2215,23 @@ NOTE: All vector floating-point code will rely on a valid value in
 exceptions when the rounding mode is invalid to simplify control
 logic.
 
-[[norm:V:instgrp:vv:vreg_vs2_vs1]]
+[[norm:vop-vv_vreg_vs2_vs1]]
 Vector-vector operations take two vectors of operands from vector
 register groups specified by `vs2` and `vs1` respectively.
 
 Vector-scalar operations can have three possible forms.  In all three forms,
-[#norm:V:instgrp:vx_vi:vreg_vs2]#the vector register group operand is specified by `vs2`.#  The second
+[#norm:vop-vx_vop-vi_vreg_vs2]#the vector register group operand is specified by `vs2`.#  The second
 scalar source operand comes from one of three alternative sources:
 
-. [#norm:V:instgrp:vi:imm_5bit]#For integer operations, the scalar can be a 5-bit immediate, `imm[4:0]`, encoded
+. [#norm:vop-vi_imm_5bit]#For integer operations, the scalar can be a 5-bit immediate, `imm[4:0]`, encoded
 in the `rs1` field.  The value is sign-extended to SEW bits, unless otherwise specified.#
 
-. [#norm:V:instgrp:vx:xreg_rs1]#For integer operations, the scalar can be taken from the scalar `x`
-register specified by `rs1`.#  [#norm:V:instgrp:vx:rs1_trunc_lsb_SEWbits]#If XLEN>SEW, the least-significant SEW bits of the `x` register are used, unless otherwise specified.#  [#norm:V:instgrp:vx:rs1_sext_SEWbits]#If XLEN<SEW, the value from the `x` register is sign-extended to SEW
+. [#norm:vop-vx_xreg_rs1]#For integer operations, the scalar can be taken from the scalar `x`
+register specified by `rs1`.#  [#norm:vop-vx_rs1_trunc_lsb_SEWbits]#If XLEN>SEW, the least-significant SEW bits of the `x` register are used, unless otherwise specified.#  [#norm:vop-vx_rs1_sext_SEWbits]#If XLEN<SEW, the value from the `x` register is sign-extended to SEW
 bits.#
 
-. [#norm:V:instgrp:vf:freg]#For floating-point operations, the scalar can be taken from a scalar
-`f` register.#  [#norm:V:instgrp:vf:freg_NaNbox_lsb_SEWbits]#If FLEN > SEW, the value in the `f` registers is
+. [#norm:vfop_freg]#For floating-point operations, the scalar can be taken from a scalar
+`f` register.#  [#norm:vfop_freg_NaNbox_lsb_SEWbits]#If FLEN > SEW, the value in the `f` registers is
 checked for a valid NaN-boxed value, in which case the
 least-significant SEW bits of the `f` register are used, else the
 canonical NaN value is used.#  [#norm:V_fp_eew_rsv]#Vector instructions where any
@@ -2299,7 +2299,7 @@ operands are always next to each other.
 ==== Widening Vector Arithmetic Instructions
 
 A few vector arithmetic instructions are defined to be __widening__
-operations where [#norm:V:instgrp:widen:vd_eew_emul]#the destination vector register group has EEW=2*SEW
+operations where [#norm:vwop_vd_eew_emul]#the destination vector register group has EEW=2*SEW
 and EMUL=2*LMUL.#  These are generally given a `vw*` prefix on the
 opcode, or `vfw*` for vector floating-point instructions.
 
@@ -2334,8 +2334,8 @@ Widening instruction encodings must follow the constraints in
 
 A few instructions are provided to convert double-width source vectors
 into single-width destination vectors.  These instructions convert a
-[#norm:V:instgrp:narrow:vs2_eew_emul]#vector register group specified by `vs2` with EEW/EMUL=2*SEW/2*LMUL# [#norm:V:instgrp:narrow:vd_eew_emul]#to a vector register
-group with the current SEW/LMUL setting.#  [#norm:V:instgrp:narrow:vs1_eew_emul]#Where there is a second
+[#norm:vnop_vs2_eew_emul]#vector register group specified by `vs2` with EEW/EMUL=2*SEW/2*LMUL# [#norm:vnop_vd_eew_emul]#to a vector register
+group with the current SEW/LMUL setting.#  [#norm:vnop_vs1_eew_emul]#Where there is a second
 source vector register group (specified by `vs1`), this has the same
 (narrower) width as the result (i.e., EEW=SEW).#
 
@@ -5006,7 +5006,7 @@ capabilities.
 
 The following five standard extensions are defined to provide varying
 degrees of vector support and are intended for use with embedded
-processors.  [#norm:Zve:XLEN]#Any of these extensions can be added to base ISAs with
+processors.  [#norm:Zve_XLEN]#Any of these extensions can be added to base ISAs with
 XLEN=32 or XLEN=64.#  The table lists the minimum VLEN and supported
 EEWs for each extension as well as what floating-point types are
 supported.
@@ -5024,37 +5024,37 @@ supported.
 | Zve64d    | 64    | 8, 16, 32, 64 |   Y   |  Y
 |===
 
-[#norm:Zve32f+Zve64x:dependent_Zve32x]#The Zve32f and Zve64x extensions depend on the Zve32x extension.#
-[#norm:Zve64f:dependent_Zve32f_Zve64x]#The Zve64f extension depends on the Zve32f and Zve64x extensions.#
-[#norm:Zve64d:dependent_Zve64f]#The Zve64d extension depends on the Zve64f extension.#
+[#norm:Zve32f_Zve64x_dependent_Zve32x]#The Zve32f and Zve64x extensions depend on the Zve32x extension.#
+[#norm:Zve64f_dependent_Zve32f_Zve64x]#The Zve64f extension depends on the Zve32f and Zve64x extensions.#
+[#norm:Zve64d_dependent_Zve64f]#The Zve64d extension depends on the Zve64f extension.#
 
-[#norm:Zve:precise_traps]#All Zve* extensions have precise traps.
+[#norm:Zve_precise_traps]#All Zve* extensions have precise traps.
 
 NOTE: There is currently no standard support for handling imprecise
 traps, so standard extensions have to provide precise traps.
 
-All Zve* extensions provide support for EEW of 8, 16, and 32, and
-Zve64* extensions also support EEW of 64.
+[#norm:Zve_EEW]#All Zve* extensions provide support for EEW of 8, 16, and 32, and
+Zve64* extensions also support EEW of 64.#
 
 All Zve* extensions support the vector configuration instructions
 (<<sec-vector-config>>).
 
-All Zve* extensions support all vector load and store instructions
+[#norm:Zve_nsupport_EEW64_XLEN32]#All Zve* extensions support all vector load and store instructions
 (<<sec-vector-memory>>), except Zve64* extensions do not
-support EEW=64 for index values when XLEN=32.
+support EEW=64 for index values when XLEN=32.#
 
-All Zve* extensions support all vector integer instructions
+[#norm:Zve64_EEW64_nsupport_vmulh]#All Zve* extensions support all vector integer instructions
 (<<sec-vector-integer>>), except that the `vmulh` integer multiply
 variants that return the high word of the product (`vmulh.vv`,
 `vmulh.vx`, `vmulhu.vv`, `vmulhu.vx`, `vmulhsu.vv`, `vmulhsu.vx`) are
-not included for EEW=64 in Zve64*.
+not included for EEW=64 in Zve64*.#
 
 NOTE: Producing the high-word of a product can take substantial
 additional gates for large EEW.
 
-All Zve* extensions support all vector fixed-point arithmetic
+[#norm:Zve64_EEW64_nsupport_vsmul]#All Zve* extensions support all vector fixed-point arithmetic
 instructions (<<sec-vector-fixed-point>>), except that `vsmul.vv` and
-`vsmul.vx` are not included in EEW=64 in Zve64*.
+`vsmul.vx` are not included in EEW=64 in Zve64*.#
 
 NOTE: As with `vmulh`, `vsmul` requires a large amount of additional
 logic, and 64-bit fixed-point multiplies are relatively rare.
@@ -5066,12 +5066,12 @@ widening reduction operations (<<sec-vector-integer-reduce>>,
 All Zve* extensions support all vector mask instructions
 (<<sec-vector-mask>>).
 
-All Zve* extensions support all vector permutation instructions
+[#norm:Zve32x_Zve64x_nsupport_freg]#All Zve* extensions support all vector permutation instructions
 (<<sec-vector-permute>>), except that Zve32x and Zve64x
 do not include those with floating-point operands, and Zve64f does not include those
-with EEW=64 floating-point operands.
+with EEW=64 floating-point operands.#
 
-The Zve32x extension depends on the Zicsr extension.
+[#norm:Zve32x_dependent_]#The Zve32x extension depends on the Zicsr extension.
 The Zve32f and Zve64f extensions depend upon the F extension,
 and implement all
 vector floating-point instructions (<<sec-vector-float>>) for
